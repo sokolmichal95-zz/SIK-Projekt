@@ -9,6 +9,7 @@ public class Connection extends Thread {
 
 	private Socket socket;
 	private int playerID;
+	private String login;
 
 	public Connection(Socket socket, int playerID) {
 		this.socket = socket;
@@ -19,18 +20,24 @@ public class Connection extends Thread {
 		try {
 			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-			out.println("Gracz nr : " + playerID + ".");
+			out.println("POLACZONO");
 			String input = in.readLine();
-			while (!input.equals("quit")) {
+			while (!input.startsWith("LOGIN")) {
+				out.println("Podaj swój login! w formacie : LOGIN <twoj login>");
 				input = in.readLine();
 				System.out.println("Wiadomość od gracza nr " + playerID + " :\n" + input);
-				out.println("Received message");
 			}
-			socket.close();
+			this.login = input.substring(6, input.length());
+			System.out.println(login);
+			
+			while(!input.equals("quit")){
+				input = in.readLine();
+				System.out.println("Wiadomość od gracza " + login + " :\n" + input);
+			}
+			// socket.close();
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
-
 }

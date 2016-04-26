@@ -7,8 +7,8 @@ public class ServerMainClass {
 
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		ServerSocket serverSocket = new ServerSocket(6660);
-		int i = 0;
+		ServerSocket serverSocket = new ServerSocket(10000);
+		int i = 1;
 
 		try {
 			while (true) {
