@@ -40,4 +40,8 @@ public class Connection extends Thread {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	public Socket getSocket() {
+		return socket;
+	}
 }
